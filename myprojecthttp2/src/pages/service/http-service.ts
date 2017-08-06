@@ -1,18 +1,33 @@
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
- 
-export class MovieService {  
+
+
+
+export class HttpService {  
     static get parameters() {
         return [[Http]];
     }
  
 	constructor(private http:Http) {
+    
 		
 	}
  
-    searchMovies(movieName) {
-        var url = 'http://api.themoviedb.org/3/search/movie?query=&query=' + encodeURI(movieName) + '&api_key=5fbddf6b517048e25bc3ac1bbeafb919';
-        var response = this.http.get(url).map(res => res.json());
+    servicePost(url,data){
+        var headers = new Headers({ 'Content-Type': 'application/json' });
+        var response = this.http.post(url,JSON.stringify(data),headers).map(res => res.json());
 		return response;
     }
+    serviceGet(url){
+        var response = this.http.get(url).map(res => res.json());
+        return response;
+    }
+
+    
+
+    
+
+    
+
+
 }
